@@ -3,4 +3,5 @@ services:
     image: yagneswarpalnati/nextjs-app:latest
     ports:
       - "3000:3000"
-    container_name: nextjs-compose
+    labels:
+      - "docker-rollout.enable=true"
