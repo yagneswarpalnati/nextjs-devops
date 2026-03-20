@@ -4,10 +4,6 @@ on:
   push:
     branches:
       - main
-      - develop
-      - 'release/**'
-      - 'feature/**'
-  workflow_dispatch:
 
 jobs:
   docker:
@@ -15,18 +11,13 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Login to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ vars.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build Docker Image
-        run: |
-          docker build \
-            -t ${{ vars.DOCKER_USERNAME }}/nextjs-app:latest \
-            -t ${{ vars.DOCKER_USERNAME }}/nextjs-app:${{ github.sha }} .
+        run: docker build -t ${{ vars.DOCKER_USERNAME }}/nextjs-app:latest
 
-      - name: Push Docker Images
-        run: |
-          docker push ${{ vars.DOCKER_USERNAME }}/nextjs-app:latest
-          docker push ${{ vars.DOCKER_USERNAME }}/nextjs-app:${{ github.sha }}
+      - name: Push Docker Image
+        run: docker push ${{ vars.DOCKER_USERNAME }}/nextjs-app:latest

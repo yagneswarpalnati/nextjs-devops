@@ -14,7 +14,7 @@ export default function Home() {
           priority
         />
         <div className={styles.intro}>
-          <h1>Version 2 - Container Test</h1>
+          <h1>Version 3 - Container Test</h1>
           <p>
             Changed
           </p>
