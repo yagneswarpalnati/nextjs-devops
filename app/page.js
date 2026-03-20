@@ -14,7 +14,7 @@ export default function Home() {
           priority
         />
         <div className={styles.intro}>
-          <h1>Final Test</h1>
+          <h1>Next.js Static Site</h1>
           <p>
             Changed
           </p>
