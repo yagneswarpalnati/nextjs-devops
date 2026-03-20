@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+      - develop
+      - 'release/**'
+      - 'feature/**'
+  workflow_dispatch:
 
 jobs:
   docker:
@@ -17,7 +21,12 @@ jobs:
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ vars.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build Docker Image
-        run: docker build -t ${{ vars.DOCKER_USERNAME }}/nextjs-app:latest .
+        run: |
+          docker build \
+            -t ${{ vars.DOCKER_USERNAME }}/nextjs-app:latest \
+            -t ${{ vars.DOCKER_USERNAME }}/nextjs-app:${{ github.sha }} .
 
-      - name: Push Docker Image
-        run: docker push ${{ vars.DOCKER_USERNAME }}/nextjs-app:latest
+      - name: Push Docker Images
+        run: |
+          docker push ${{ vars.DOCKER_USERNAME }}/nextjs-app:latest
+          docker push ${{ vars.DOCKER_USERNAME }}/nextjs-app:${{ github.sha }}
