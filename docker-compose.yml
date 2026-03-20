@@ -1,12 +1,5 @@
 services:
   app:
     image: yagneswarpalnati/nextjs-app:latest
-
-  nginx:
-    image: nginx:latest
     ports:
-      - "3000:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    depends_on:
-      - app
+      - "3000:3000"
