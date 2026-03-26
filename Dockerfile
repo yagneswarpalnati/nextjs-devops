@@ -1,5 +1,4 @@
-# ---------- Stage 1: Build ----------
-FROM node:20-alpine AS builder
+FROM node:20 AS builder
 
 WORKDIR /app
 
@@ -8,18 +7,19 @@ RUN npm install
 
 COPY . .
 
-# Build static site
 RUN npm run build
 
-# ---------- Stage 2: Serve with Nginx ----------
-FROM nginx:alpine
+# Step 2: Production stage
+FROM node:20-slim
 
-RUN rm -rf /usr/share/nginx/html/*
+WORKDIR /app
 
-COPY --from=builder /app/out /usr/share/nginx/html
+COPY --from=builder /app/package*.json ./
+RUN npm install --omit=dev
 
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
 
-EXPOSE 80
+EXPOSE 3000
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["npm", "start"]
