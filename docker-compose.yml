@@ -1,5 +1,5 @@
 services:
   app:
-    image: yagneswarpalnati/nextjs-app:latest
+    image: yagneswarpalnati/nextjs-static:latest
     ports:
       - "3000:3000"

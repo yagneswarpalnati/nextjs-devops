@@ -15,7 +15,7 @@ export default function Home() {
         />
         <div className={styles.intro}>
           <h1>Next.js Static Site</h1>
-          <h2>Deployed with Docker</h2>
+          <h2>Deployed</h2>
         </div>
         <div className={styles.ctas}>
           <a
