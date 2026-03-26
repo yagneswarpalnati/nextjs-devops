@@ -33,4 +33,3 @@ jobs:
           push: true
           tags: |
             ${{ vars.DOCKER_USERNAME }}/nextjs-static:latest
-            ${{ vars.DOCKER_USERNAME }}/nextjs-static:${{ github.sha }} 
