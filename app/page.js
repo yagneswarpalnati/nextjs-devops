@@ -16,7 +16,7 @@ export default function Home() {
         <div className={styles.intro}>
           <h1>Next.js Static Site</h1>
           <p>Welcome to the Next.js Static Site!</p>
-          <p>Test 7</p>
+          <p>Tag</p>
         </div>
         <div className={styles.ctas}>
           <a
